@@ -1,0 +1,1 @@
+<?phpreturn [    'select_a_province'=>'សូមជ្រើសរើសរាជធានី/េខត្ត',    'select_a_district'=>'សូមជ្រើសរើសក្រុង/ស្រុក/ខណ្ឌ',    'select_a_commune'=>'សូមជ្រើសរើសឃុំ/សង្កាត់',    'select_a_village'=>'សូមជ្រើសរើសភូមិ',];
