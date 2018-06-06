@@ -26,15 +26,25 @@ Route::get('/lang/{l}', function ($l) {
     return redirect()->back();
 });
 
-
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function()
 {
   // Backpack\CRUD: Define the resources for the entities you want to CRUD.
      CRUD::resource('category', 'Admin\CategoryCrudController');
      CRUD::resource('product', 'Admin\ProductCrudController');
      CRUD::resource('table', 'Admin\TableCrudController');
-  
+     CRUD::resource('warehouse', 'Admin\WarehouseCrudController');
+     CRUD::resource('warehousequatity', 'Admin\WarehouseQuatityCrudController');
+     CRUD::resource('tableform', 'Admin\TableFormCrudController');
   
   // [...] other routes
 });
+Route::get('/api/category', 'Api\CategoryController@index');
+Route::get('/api/category/{id}', 'Api\CategoryController@show');
+
+
+Route::get('/api/warehouse', 'Api\WarehouseQuatityController@index');
+Route::get('/api/warehouse/{id}', 'Api\WarehouseQuatityController@show');
+
+Route::get('/api/product', 'Api\ProductQuatityController@index');
+Route::get('/api/product/{id}', 'Api\ProductQuatityController@show');
 

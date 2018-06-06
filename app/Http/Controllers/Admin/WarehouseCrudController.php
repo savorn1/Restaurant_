@@ -18,9 +18,12 @@ class WarehouseCrudController extends CrudController
         | BASIC CRUD INFORMATION
         |--------------------------------------------------------------------------
         */
+
         $this->crud->setModel('App\Models\Warehouse');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/warehouse');
         $this->crud->setEntityNameStrings('warehouse', 'warehouses');
+
+
 
         /*
         |--------------------------------------------------------------------------
@@ -28,7 +31,28 @@ class WarehouseCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
 
-        $this->crud->setFromDb();
+        //$this->crud->setFromDb();
+        $this->crud->addColumn([
+            'name' => 'name',
+            'label' => 'Warehouse'
+        ]
+        );
+         $this->crud->addField([
+            'name' => 'name',
+            'label' => 'Warehouse'
+        ]);
+
+         $this->crud->addColumn([
+            'name' => 'description',
+            'label' => 'Description'
+        ]
+        );
+         $this->crud->addField([
+                'name' => 'description',
+                'label' => 'Description'
+        ]);
+        $this->crud->addColumns(['created_at']);
+         $this->crud->addColumns(['updated_at']);
 
         // ------ CRUD FIELDS
         // $this->crud->addField($options, 'update/create/both');

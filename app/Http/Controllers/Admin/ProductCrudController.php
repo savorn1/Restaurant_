@@ -28,40 +28,101 @@ class ProductCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
 
-       // $this->crud->setFromDb();
+        //$this->crud->setFromDb();
+        //$this->crud->addColumns(['category']);
 
-         $this->crud->addColumns(['name']);
+        $this->crud->addColumn([
+            'name' => 'products', // The db column name
+            'label' => "No", // Table column heading
+            'type' => 'array_count'
+        ]);
+            $this->crud->addColumn([
+              'label' => 'category',
+              'name' => 'category_id',
+              'type' =>  'select',
+              'entity'=>  'category',
+              'attribute'=>'name',
+              'model'=>'App\Models\Product'
+            ]);
+
+
+        $this->crud->addField([
+            // 1-n relationship
+            'label' => "Category", // Table column heading
+            'type' => "select2_from_ajax",
+            'name' => 'category_id', // the column that contains the ID of that connected entity
+             // the method that defines the relationship in your Model
+            'attribute' => "name", // foreign key attribute that is shown to user
+            'model' => "App\Models\Category",
+            'entity'=>  'category', // foreign key model
+            'data_source' => url("api/category"), // url to controller search function (with /{id} should return model)
+            'placeholder' => "Select a category", // placeholder for the select
+            'minimum_input_length' => 0, // minimum characters to type before querying results
+        ]);
+        
+
+        $this->crud->addColumn([
+            'name' =>'name',
+            'label'=>'Product'
+        ]);
          $this->crud->addField([
                 'name' => 'name',
                 'label' => 'Product'
         ]);
 
 
-         $this->crud->addColumns(['description']);
+         $this->crud->addColumn([
+            'name' =>'description',
+            'label'=>'Description'
+        ]);
          $this->crud->addField([
                 'name' => 'description',
                 'label' => 'Description'
         ]);
-          $this->crud->addColumns(['code']);
+
+         $this->crud->addColumn([
+            'name' =>'code',
+            'label'=>'Code'
+        ]);
          $this->crud->addField([
                 'name' => 'code',
                 'label' => 'Code'
         ]);
 
-          $this->crud->addColumns(['price']);
+         $this->crud->addColumn([
+            'name' =>'price',
+            'label'=>'Price($)'
+        ]);
          $this->crud->addField([
                 'name' => 'price',
-                'label' => 'Price'
+                'label' => 'Price($)'
         ]);
-          $this->crud->addColumns(['cost']);
+         $this->crud->addColumn([
+                'name' => 'cost',
+                'label' => 'Cost($)'
+        ]);
          $this->crud->addField([
                 'name' => 'cost',
-                'label' => 'Cost'
+                'label' => 'Cost($)'
+        ]);
+        $this->crud->addColumn([
+            'label' => "Profile Image",
+            'name' => "image",
+            'type' => 'image',
+           // 'prefix' => 'uploads/products/',
+        ]);
+        $this->crud->addField([ // image
+            'label' => "Profile Image",
+            'name' => "image",
+            'type' => 'image',
+            'upload' => true,
+            'crop' => true, // set to true to allow cropping, false to disable
+            'aspect_ratio' => 1, // ommit or set to 0 to allow any aspect ratio
+            // 'disk' => 's3_bucket', // in case you need to show images from a different disk
+            // 'prefix' => 'uploads/images/profile_pictures/' // in case you only store the filename in the database, this text will be prepended to the database value
         ]);
 
-        $this->crud->addColumns(['created_at']);
-         $this->crud->addColumns(['updated_at']);
-
+       
         // ------ CRUD FIELDS
         // $this->crud->addField($options, 'update/create/both');
         // $this->crud->addFields($array_of_arrays, 'update/create/both');
@@ -113,7 +174,7 @@ class ProductCrudController extends CrudController
         // ------ DATATABLE EXPORT BUTTONS
         // Show export to PDF, CSV, XLS and Print buttons on the table view.
         // Does not work well with AJAX datatables.
-        // $this->crud->enableExportButtons();
+         $this->crud->enableExportButtons();
 
         // ------ ADVANCED QUERIES
         // $this->crud->addClause('active');

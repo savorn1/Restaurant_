@@ -16,12 +16,15 @@ class Warehouse extends Model
     */
 
     protected $table = 'warehouses';
-    // protected $primaryKey = 'id';
+    protected $primaryKey = 'id';
     // public $timestamps = false;
     // protected $guarded = ['id'];
-    protected $fillable = [];
+    protected $fillable = ['name','description'];
     // protected $hidden = [];
     // protected $dates = [];
+    public  function warhouse_quatity(){
+        return $this->hasMany('App\Models\WarehouseQuatity','warhouse_id');
+    }
 
     /*
     |--------------------------------------------------------------------------
